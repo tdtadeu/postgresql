@@ -2,7 +2,6 @@ username = node[:postgresql][:username]
 password = node[:postgresql][:password]
 
 lock = "/etc/postgresql/9.1/main/.#{username}"
-queries = [ "VACUUM FREEZE;" ]
 
 queries << if password
   "CREATE USER #{username} WITH PASSWORD #{password}"
