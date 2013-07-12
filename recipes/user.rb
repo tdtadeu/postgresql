@@ -3,6 +3,7 @@ password = node[:postgresql][:password]
 
 lock = "/etc/postgresql/9.1/main/.#{username}"
 
+queries = []
 queries << if password
   "CREATE USER #{username} WITH PASSWORD #{password}"
 else
