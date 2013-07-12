@@ -9,11 +9,13 @@ else
   "CREATE USER #{username}" 
 end
 
-queries << "ALTER USER #{username} CREATEDB;"
+queries << "ALTER USER #{username} CREATEDB"
 
-execute "psql -d template1 -c #{queries.join(" ").inspect}" do
-  user "postgres"
-  creates lock
+queries.each do |query|
+  execute "psql -d template1 -c #{query.inspect}" do
+    user "postgres"
+    creates lock
+  end
 end
 
 execute "touch #{lock}"
