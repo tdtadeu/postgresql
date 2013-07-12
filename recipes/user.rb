@@ -12,7 +12,7 @@ end
 
 queries << "ALTER USER #{username} CREATEDB;"
 
-execute "psql -d template1 -c #{query.join(" ").inspect}" do
+execute "psql -d template1 -c #{queries.join(" ").inspect}" do
   user "postgres"
   creates lock
 end
