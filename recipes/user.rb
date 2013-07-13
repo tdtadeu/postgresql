@@ -3,17 +3,16 @@ password = node[:postgresql][:password]
 
 lock = "/etc/postgresql/9.1/main/.#{username}"
 
-queries = []
-queries << if password
-  "CREATE USER #{username} WITH PASSWORD #{password}"
+if password
+  bash "Create #{username} on PostgreSQL" do
+    code <<-EOH
+      echo "CREATER ROLE '#{username}' WITH PASSWORD '#{password}'; ALTER USER #{username} CREATEDB;" | psql
+    EOH
+    user "postgres"
+    creates lock
+  end
 else
-  "CREATE USER #{username}" 
-end
-
-queries << "ALTER USER #{username} CREATEDB"
-
-queries.each do |query|
-  execute "psql -d template1 -c #{query.inspect}" do
+  execute "createuser --createdb --no-password --no-createrole --no-superuser #{username}" do
     user "postgres"
     creates lock
   end
