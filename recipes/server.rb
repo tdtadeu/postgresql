@@ -1,1 +1,1 @@
-package "postgresql-9.1"
+package "postgresql-#{node[:postgresql][:version]}"

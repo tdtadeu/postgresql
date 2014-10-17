@@ -1,6 +1,6 @@
 Postgresql Cookbook
 ===================
-Installs PostgreSQL
+Installs PostgreSQL 9.3
 
 Requirements
 ------------

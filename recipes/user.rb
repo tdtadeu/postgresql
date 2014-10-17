@@ -1,7 +1,8 @@
 username = node[:postgresql][:username]
 password = node[:postgresql][:password]
+version  = node[:postgresql][:version]
 
-lock = "/etc/postgresql/9.1/main/.#{username}"
+lock = "/etc/postgresql/#{version}/main/.#{username}"
 
 if password
   bash "Create #{username} on PostgreSQL" do
